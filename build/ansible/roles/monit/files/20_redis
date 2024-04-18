@@ -1,0 +1,9 @@
+#Archivo gestionado con ansible
+
+check redis with pidfile /run/redis/redis-server.pid
+    start program = "/usr/sbin/service redis-server start" with timeout 10 seconds
+    stop program  = "/usr/sbin/service redis-server stop"
+    if failed host 127.0.0.1 port 6379 
+        with timeout 15 seconds
+        then restart
+    if 3 restarts within 5 cycles then timeout

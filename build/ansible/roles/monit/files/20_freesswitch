@@ -1,0 +1,7 @@
+#Archivo gestionado con ansible
+
+CHECK PROCESS freeswitch WITH PIDFILE /var/run/freeswitch/freeswitch.pid
+  START PROGRAM = "/usr/sbin/service liberator start"
+  STOP PROGRAM = "/usr/sbin/service liberator stop"
+
+  GROUP freeswitch

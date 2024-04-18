@@ -1,0 +1,69 @@
+- name: "Instalacion de netdata"
+  apt: 
+    name: 
+      - netdata
+      - swig
+    state: present
+
+
+- name: "Instalacion de paquetes extra para monitorizacion de freeswitch"
+  ansible.builtin.pip:
+    name: greenswitch==0.0.9
+
+
+- name: Check if ESL exists
+  stat:
+    path: /usr/local/lib/python3.9/dist-packages/ESL/__init__.py
+  register: install_pythonesl
+
+
+- name: Install Python-ESL
+  block:
+    - name: Clonamos el repo de python-ESL 
+      git:
+        repo: https://github.com/alexey-khabulyak/python-ESL.git
+        dest: /home/sarenet/python-ESL
+        clone: yes
+        update: yes
+
+    - name: Install Python-ESL
+      shell: /usr/bin/pip3 install /home/sarenet/python-ESL
+      args:
+        executable: /bin/bash
+        chdir: /usr/local/src/freeswitch
+
+  when: install_pythonesl.stat.exists == False
+
+
+- name: "Configuracion de netdata"
+  ansible.builtin.template:
+    src: ../templates/netdata.conf.j2
+    dest: /etc/netdata/netdata.conf
+    owner: netdata
+    group: netdata
+    mode: 0644
+  notify: restart-netdata
+
+- name: "Script extra para monitorizar freeswitch"
+  copy: 
+    src: ../files/freeswitch.chart.py
+    dest: /usr/lib/netdata/python.d/freeswitch.chart.py
+    owner: root
+    group: root
+    mode: 0755
+
+- name: "Configuración extra para monitorizar freeswitch"
+  copy: 
+    src: ../files/freeswitch.conf
+    dest: /usr/lib/netdata/conf.d/python.d/freeswitch.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart-netdata
+
+
+- name: Nos aseguramos de que esté funcionando
+  ansible.builtin.systemd:
+    state: started
+    name: netdata
+    enabled: true

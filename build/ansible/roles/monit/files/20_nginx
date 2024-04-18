@@ -1,0 +1,13 @@
+# This file is managed by Ansible. DO NOT EDIT!
+
+CHECK PROCESS nginx WITH PIDFILE /var/run/nginx.pid
+  START PROGRAM = "/usr/sbin/service nginx start"
+  STOP PROGRAM = "/usr/sbin/service nginx stop"
+
+  IF FAILED 
+    host 127.0.0.1 
+    port 8443  
+    protocol https 
+        request "/apidocs"
+  THEN RESTART
+

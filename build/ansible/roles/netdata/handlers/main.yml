@@ -1,0 +1,5 @@
+- name: restart-netdata
+  command: service netdata restart
+
+- name: reload-monit
+  command: service monit reload

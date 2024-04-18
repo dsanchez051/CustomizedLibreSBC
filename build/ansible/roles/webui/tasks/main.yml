@@ -1,0 +1,38 @@
+- name: Archivos de webui
+  copy: 
+    src: ../files/webui
+    dest: /opt
+    owner: root
+    group: root
+    mode: 0644
+
+
+- name: Instalacion de paquetes
+  ansible.builtin.apt:
+    default_release: bullseye-backports
+    pkg:
+    - golang-src
+    - golang-doc
+    - golang
+
+- name: Compilacion del webui
+  shell: go build -o /opt/webui-bin /opt/webui/main.go
+  args:
+    chdir: /opt/webui
+    executable: /bin/bash
+    creates: /opt/webui/webui-bin
+
+- name: Archivo de systemd
+  copy:
+    src: files/libresbc-webui.service
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Habilitar y arrancar el servicio webui
+  ansible.builtin.systemd:
+    name: libresbc-webui
+    enabled: yes
+    state: started
+    daemon_reload: yes

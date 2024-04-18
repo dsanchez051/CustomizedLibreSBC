@@ -1,0 +1,5 @@
+- name: restart-monit
+  command: service monit restart
+
+- name: reload-monit
+  command: service monit reload

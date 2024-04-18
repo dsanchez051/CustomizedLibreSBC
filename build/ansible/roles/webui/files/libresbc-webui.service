@@ -1,0 +1,12 @@
+[Unit]
+Description=LibreSBC WebUI
+After=multi-user.target
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+ExecStart=/opt/webui/webui-bin -L https://127.0.0.1:8443
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target

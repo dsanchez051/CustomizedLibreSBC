@@ -1,0 +1,27 @@
+- name: LibreSBC Deployment
+  hosts: all
+  gather_facts: true
+  become: true
+
+  vars:
+    version: 'v0.7.1.d'
+    srcdir: '{{inventory_dir|dirname|dirname|dirname|dirname}}'
+    dstdir: /opt/libresbc/{{version}}
+
+  roles:
+    - role: platform
+      tags: [platform]
+    - role: libre
+      tags: [libre]
+    - role: nginx
+      tags: [nginx]
+    - role: nftables
+      tags: [nftables]
+    - role: captagent
+      tags: [captagent]
+    - role: webui
+      tags: [webui]
+    - role: monit
+      tags: [monit]
+    - role: netdata
+      tags: [netdata]

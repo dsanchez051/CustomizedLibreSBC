@@ -1,0 +1,6 @@
+# This file is managed by Ansible. DO NOT EDIT!
+
+CHECK PROCESS netdata MATCHING netdata
+  START PROGRAM = "/usr/sbin/service netdata start"
+  STOP PROGRAM = "/usr/sbin/service netdata stop"
+

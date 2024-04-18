@@ -1,0 +1,9 @@
+# This file is managed by Ansible. DO NOT EDIT!
+
+CHECK PROCESS webui-bin MATCHING webui-bin
+  START PROGRAM = "/usr/sbin/service libresbc-webui start"
+  STOP PROGRAM = "/usr/sbin/service libresbc-webui stop"
+
+  IF FAILED HOST 127.0.0.1 PORT 8088 TYPE TCP PROTOCOL HTTP
+  THEN RESTART
+

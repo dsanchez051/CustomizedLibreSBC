@@ -1,0 +1,369 @@
+
+
+###############
+### CLUSTER ###
+############### 
+
+
+### Estado cluster 
+GET https://194.30.3.25:8443/libreapi/cluster
+Content-Type: application/json
+
+
+### Actualizar cluster 
+PUT https://194.30.3.25:8443/libreapi/cluster
+Content-Type: application/json
+
+{
+    "name": "defaults",
+    "members": [
+        "sbc01"
+    ],
+    "rtp_start_port": 16384,
+    "rtp_end_port": 32767,
+    "max_calls_per_second": 50,
+    "max_concurrent_calls": 400
+}
+
+
+### Estado capacidad 
+GET http://194.30.0.142:8088/libreapi/class/capacity
+Content-Type: application/json
+
+
+### Estado capacidad 
+POST http://194.30.0.142:8088/libreapi/class/capacity
+Content-Type: application/json
+
+{
+	"name": "prod",
+	"desc": "normal traffic",
+	"cps": 10,
+	"concurentcalls": 100
+}
+
+################
+### NETALIAS ###
+################ 
+
+### listado netalias 
+GET http://194.30.0.142:8088/libreapi/base/netalias
+Content-Type: application/json
+
+### Crear netalias sarevoz
+POST http://194.30.0.142:8088/libreapi/base/netalias
+Content-Type: application/json
+
+{
+    "name": "sarevoz",
+    "desc": "sarevoz facing",
+    "addresses": [
+        {
+        "member": "sbc01",
+        "listen": "194.30.3.25",
+        "advertise": "194.30.3.25"
+        }
+    ]
+}
+
+
+### Crear netalias proveedor
+POST http://194.30.0.142:8088/libreapi/base/netalias
+Content-Type: application/json
+
+{
+    "name": "euskaltel",
+    "desc": "euskaltel facing",
+    "addresses": [
+        {
+        "member": "sbc01",
+        "listen": "194.30.3.25",
+        "advertise": "194.30.3.25"
+        }
+    ]
+}
+
+
+
+### Actualizar netalias sarevoz
+PUT http://194.30.0.142:8088/libreapi/base/netalias/sarevoz
+Content-Type: application/json
+
+{
+    "name": "sarevoz",
+    "desc": "sarevoz facing",
+    "addresses": [
+        {
+        "member": "sbc01",
+        "listen": "194.30.0.142",
+        "advertise": "194.30.0.142"
+        }
+    ]
+}
+
+####################
+### SIP PROFILES ###
+####################
+
+### listado profile 
+GET http://194.30.0.142:8088/libreapi/sipprofile
+Content-Type: application/json
+
+
+### Crear profile sarevoz
+POST http://194.30.0.142:8088/libreapi/sipprofile
+Content-Type: application/json
+
+{
+    "name": "sarevoz",
+    "desc": "SIP Sarevoz Profile",
+    "user_agent": "LibreSBC",
+    "sdp_user": "LibreSBC",
+    "local_network_acl": "rfc1918.auto",
+    "addrdetect": "autonat",
+    "enable_100rel": false,
+    "ignore_183nosdp": true,
+    "sip_options_respond_503_on_busy": false,
+    "disable_transfer": true,
+    "manual_redirect": true,
+    "enable_3pcc": false,
+    "enable_compact_headers": false,
+    "dtmf_type": "rfc2833",
+    "media_timeout": 0,
+    "rtp_rewrite_timestamps": true,
+    "context": "carrier",
+    "sip_port": 5060,
+    "sip_address": "sarevoz",
+    "rtp_address": "sarevoz",
+    "tls": false,
+    "tls_only": false,
+    "sips_port": 5061,
+    "tls_version": "tlsv1.2"
+}
+
+
+### Crear profile euskaltel
+POST http://194.30.0.142:8088/libreapi/sipprofile
+Content-Type: application/json
+
+{
+    "name": "euskaltel",
+    "desc": "SIP euskaltel Profile",
+    "user_agent": "LibreSBC",
+    "sdp_user": "LibreSBC",
+    "local_network_acl": "rfc1918.auto",
+    "addrdetect": "autonat",
+    "enable_100rel": false,
+    "ignore_183nosdp": true,
+    "sip_options_respond_503_on_busy": false,
+    "disable_transfer": true,
+    "manual_redirect": true,
+    "enable_3pcc": false,
+    "enable_compact_headers": false,
+    "dtmf_type": "rfc2833",
+    "media_timeout": 0,
+    "rtp_rewrite_timestamps": true,
+    "context": "carrier",
+    "sip_port": 5060,
+    "sip_address": "euskaltel",
+    "rtp_address": "euskaltel",
+    "tls": false,
+    "tls_only": false,
+    "sips_port": 5061,
+    "tls_version": "tlsv1.2"
+}
+
+
+#####################
+### MEDIA PROFILE ###
+#####################
+
+
+### listado profile 
+GET http://194.30.0.142:8088/libreapi/class/media
+Content-Type: application/json
+
+
+### Crear profile sarevoz
+POST http://194.30.0.142:8088/libreapi/class/media
+Content-Type: application/json
+
+{
+    "name": "sarevoz",
+    "desc": "sarevoz media profile",
+    "codecs": [
+        "PCMA",
+        "PCMU",
+        "G729"
+    ]
+}
+
+
+### Crear profile euskaltel
+POST http://194.30.0.142:8088/libreapi/class/media
+Content-Type: application/json
+
+{
+    "name": "euskaltel",
+    "desc": "euskaltel media profile",
+    "codecs": [
+        "PCMU"
+    ]
+}
+
+
+
+### Actualizar profile euskaltel
+PUT http://194.30.0.142:8088/libreapi/class/media/euskaltel
+Content-Type: application/json
+
+{
+    "name": "euskaltel",
+    "desc": "euskaltel media profile",
+    "codecs": [
+        "PCMA"
+    ]
+}
+
+################
+### GATEWAYS ###
+################
+
+
+### listado gateways 
+GET http://194.30.0.142:8088/libreapi/base/gateway
+Content-Type: application/json
+
+
+### Crear gw euskaltel
+POST http://194.30.0.142:8088/libreapi/base/gateway
+Content-Type: application/json
+
+{
+    "name": "EUSKALTELSIP",
+    "desc": "Euskaltel SIP",
+    "username": "none",
+    "password": "none",
+    "proxy": "172.31.255.1",
+    "port": 5060,
+    "transport": "udp",
+    "do_register": false,
+    "caller_id_in_from": true,
+    "cid_type": "none",
+    "ping": 600
+}
+
+
+### detalle gateway
+GET http://194.30.0.142:8088/libreapi/base/gateway/EUSKALTELSIP
+Content-Type: application/json
+
+
+
+
+
+
+####################
+### OUTBOUND ITX ###
+####################
+
+### listado outbound  
+GET http://194.30.0.142:8088/libreapi/interconnection/outbound
+Content-Type: application/json
+
+### Crear outbound euskaltel
+POST http://194.30.0.142:8088/libreapi/interconnection/outbound
+Content-Type: application/json
+
+{
+    "name": "Euskaltel",
+    "desc": "Euskaltel outbound",
+    "sipprofile": "euskaltel",
+    "distribution": "weight_based",
+    "rtpaddrs": [
+        "172.31.255.0/24"
+    ],
+    "media_class": "euskaltel",
+    "capacity_class": "prod",
+    "translation_classes": [],
+    "manipulation_classes": [],
+    "privacy": ["none"],
+    "cid_type": "none",
+    "nodes": [
+        "_ALL_"
+    ],
+    "enable": true,
+    "gateways": [
+        {
+        "name": "EUSKALTELSIP",
+        "weight": 1
+        }
+    ]
+}
+
+
+### detalle gateway
+GET http://194.30.0.142:8088/libreapi/interconnection/outbound/Euskaltel
+Content-Type: application/json
+
+
+
+###############
+### ROUTING ###
+###############
+
+### listado routing
+GET http://194.30.0.142:8088/libreapi/routing/table
+Content-Type: application/json
+
+
+### Crear routing euskaltel
+POST http://194.30.0.142:8088/libreapi/routing/table
+Content-Type: application/json
+
+{
+    "name": "toeuskaltel",
+    "desc": "route call to euskaltel",
+    "action": "route",
+    "routes": {
+        "primary": "Euskaltel",
+        "secondary": "Euskaltel",
+        "load": 100
+    }
+}
+
+####################
+### INBOUND ITX ###
+####################
+
+### listado outbound  
+GET http://194.30.0.142:8088/libreapi/interconnection/inbound
+Content-Type: application/json
+
+### Crear outbound euskaltel
+POST http://194.30.0.142:8088/libreapi/interconnection/inbound
+Content-Type: application/json
+
+{
+    "name": "Sarevoz",
+    "desc": "Sarevoz",
+    "sipprofile": "sarevoz",
+    "routing": "toeuskaltel",
+    "sipaddrs": [
+        "194.30.3.16/28"
+    ],
+    "rtpaddrs": [
+        "194.30.3.16/28"
+    ],
+    "ringready": false,
+    "media_class": "sarevoz",
+    "capacity_class": "prod",
+    "translation_classes": [],
+    "manipulation_classes": [],
+    "authscheme": "IP",
+    "nodes": [
+        "_ALL_"
+    ],
+    "enable": true
+}
+

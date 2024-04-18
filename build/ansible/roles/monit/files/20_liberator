@@ -1,0 +1,7 @@
+# This file is managed by Ansible. DO NOT EDIT!
+
+CHECK PROCESS liberator MATCHING liberator
+  START PROGRAM = "/usr/sbin/service liberator start"
+  STOP PROGRAM = "/usr/sbin/service liberator stop"
+
+
