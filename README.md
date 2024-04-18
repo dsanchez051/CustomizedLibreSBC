@@ -8,3 +8,6 @@ Se han realizado modificaciones respecto a los ficheros origianales y se han añ
 - Implementación de NetData para visualizar y monitorear métricas en tiempo real. 
 
 El repositorio original de LibreSBC es el siguiente: https://github.com/hnimminh/libresbc/wiki
+
+La primera instalación mediante un *clone* del repositorio original y siguiendo la guia de instalación del mismo.
+Tras la primera instalación completa (con Kamailio y FreeSwitch), se podrán realizar los poseriores despliegues desde este repositorio.
