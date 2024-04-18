@@ -9,5 +9,5 @@ Se han realizado modificaciones respecto a los ficheros origianales y se han añ
 
 El repositorio original de LibreSBC es el siguiente: https://github.com/hnimminh/libresbc/wiki
 
-La primera instalación mediante un *clone* del repositorio original y siguiendo la guia de instalación del mismo.
-Tras la primera instalación completa (con Kamailio y FreeSwitch), se podrán realizar los poseriores despliegues desde este repositorio.
+Es importante que la primera instalación se realice mediante un *clone* del repositorio original y siguiendo la guía de instalación del mismo. 
+Tras la primera instalación completa (con Kamailio y FreeSwitch), se podrán realizar los posteriores despliegues desde este repositorio.
