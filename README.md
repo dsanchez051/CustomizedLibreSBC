@@ -1,3 +1,3 @@
-[Documentación SBCs](https://docs.sare.net/docs/documentacion-sarevoz/arquitectura/sbcs/)
+Este repositorio contiene los ficheros del proyecto LibreSBC modificados para el despliegue del SBC en la red de Sarenet.
 
-[Documentación SBC 01 - EUSKALTEL](https://docs.sare.net/docs/documentacion-sarevoz/anycast/sbc/)
+El repositorio original de LibreSBC es el siguiente: https://github.com/hnimminh/libresbc/wiki
